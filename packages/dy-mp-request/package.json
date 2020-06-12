@@ -7,5 +7,6 @@
     "test": "test"
   },
   "author": "myjustify",
-  "license": "ISC"
+  "license": "ISC",
+  "homepage": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-mp-request"
 }
