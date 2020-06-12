@@ -1,0 +1,11 @@
+{
+  "name": "dy-mp-request",
+  "version": "1.0.0",
+  "description": "小程序请求封装",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "myjustify",
+  "license": "ISC"
+}
