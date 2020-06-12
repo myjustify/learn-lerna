@@ -3,5 +3,6 @@
   "private": true,
   "devDependencies": {
     "lerna": "^3.22.1"
-  }
+  },
+  "homepage": "https://github.com/myjustify/learn-lerna"
 }
