@@ -1,6 +1,6 @@
 {
   "name": "dy-mp-request",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "小程序请求封装",
   "main": "index.js",
   "scripts": {
