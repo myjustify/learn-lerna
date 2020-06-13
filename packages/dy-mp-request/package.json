@@ -8,5 +8,8 @@
   },
   "author": "myjustify",
   "license": "ISC",
-  "homepage": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-mp-request"
+  "homepage": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-mp-request",
+  "dependencies": {
+    "dy-mp-util": "^1.0.2"
+  }
 }
