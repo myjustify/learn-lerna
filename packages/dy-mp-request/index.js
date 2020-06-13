@@ -1,10 +1,12 @@
 const util = require('dy-mp-util');
-console.log('引入dy-mp-request')
-function mpRequest(apiServer){
+// data存储apiServer的对象 
+function mpRequest({ data:gdata,apiServer }){
     this.failMsg = '网络异常，稍后重试';
-    this.loading = false;
-    this.apiServer = apiServer;
+    this.loading = false; 
+    this.gdata = gdata;
+    this.apiServerField = apiServer
 }
+mpRequest.prototype.errField = 'message';   //后台抛错信息的字段默认message  
 mpRequest.prototype.request = function(params,extra){
   /**
    * params
@@ -13,7 +15,7 @@ mpRequest.prototype.request = function(params,extra){
     header: {},data: {},url: '',method: 'POST',
     dataType: 'json',responseType: 'text',
   }
-  params.url = this.apiServer + params.url;
+  params.url = this.gdata[this.apiServerField] + params.url;
   params = { ...p, ...params }
   let header = { "content-type": "application/json", ...params.header };
   /**
@@ -51,7 +53,11 @@ mpRequest.prototype.request = function(params,extra){
         resolve(res)
       }else{
         let dataType = typeof data;
-        if (dataType == 'string') { data = { message: data } };
+        if (dataType == 'string') {
+            data = { message: data } 
+        }else{
+            data.message = data[this.errField]
+        }
         if (extra.toastErr) {
           util.alert({
               content: data.message,
