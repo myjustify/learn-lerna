@@ -87,8 +87,8 @@ mpRequest.prototype.request = function(params,extra){
       },
       complete: () => {
         wx.stopPullDownRefresh()
-        loading&&extra.showLoading && util.hideLoading();
-        loading&&(loading = false)
+        this.loading&&extra.showLoading && util.hideLoading();
+        this.loading&&(this.loading = false)
       }
     })
   })
