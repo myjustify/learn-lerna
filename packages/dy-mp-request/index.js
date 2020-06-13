@@ -1,10 +1,10 @@
 const util = require('dy-mp-util');
 // data存储apiServer的对象 
-function mpRequest({ data:gdata,apiServer }){
+function mpRequest({ data:gdata,field }){
     this.failMsg = '网络异常，稍后重试';
     this.loading = false; 
     this.gdata = gdata;
-    this.apiServerField = apiServer
+    this.apiServerField = field
 }
 mpRequest.prototype.errField = 'message';   //后台抛错信息的字段默认message  
 mpRequest.prototype.request = function(params,extra){
