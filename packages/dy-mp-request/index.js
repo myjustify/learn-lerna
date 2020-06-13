@@ -1,12 +1,11 @@
-const util = require('./util.js')
-const noAlertList = [
-  '/user/ownerMenu/getWeiXinRole', '/rgt/rgtOwner/findOwnerLoginInfo', 
-  '/user/ownerMenu/queryOwnerMenus','/user/ownerMenu/queryAllMenuButtonV2'
-]
+const util = require('dy-mp-util');
 
-function request(params = {}, extra = {}){
-  let loading = false;
-  let apiServer = getApp().globalData.apiServer;
+function mpRequest(apiServer){
+    this.failMsg = '网络异常，稍后重试';
+    this.loading = false;
+    this.apiServer = apiServer;
+}
+mpRequest.prototype.request = function(params,extra){
   /**
    * params
    */
@@ -17,11 +16,6 @@ function request(params = {}, extra = {}){
   params.url = apiServer + params.url;
   params = { ...p, ...params }
   let header = { "content-type": "application/json", ...params.header };
-  let tk = wx.getStorageSync(getApp().globalData['TOKEN']);
-  if (tk) {
-    header['cookie'] = `CONSIGNOR-SESSION=${tk}`;
-  }
-  params.header = header
   /**
    * extra
    * errBack    后台跑错回调
@@ -30,12 +24,22 @@ function request(params = {}, extra = {}){
   let e = { 
     showLoading: true, //默认带showLoading
     loadingText: '', //加载文本
+    takeTk: true,   //是否带上tk
     toastFail: true, //直接抛出接口返回的错误
     toastErr: false,//直接抛出网络异常
     errBack: '', //后台抛错回调
     failBack: ''  //网络异常回调
   }
   extra = { ...e,...extra }
+  
+  //扩展接口 getTk  项目引入后通过prototype扩展一个getTK的方法
+  if(extra.takeTk&&this.getTk){
+    let tk = this.getTk()
+    if (tk) {
+        header = { ...header,...tk };
+    }
+  }
+  params.header = header
 
   return new Promise((resolve, reject) => {
 
@@ -43,22 +47,17 @@ function request(params = {}, extra = {}){
     function successFun(res) {
       let data = res.data || {};
       let statusCode = res.statusCode;
-      if (statusCode == 401) {
-        if (noAlertList.find((item=> params.url.endsWith(item)))!=undefined){
-          getApp().goInitPage()
-        }else{
-          util.alertSuccess('登录失效重新登录', () => {
-            getApp().goLoginPage()
-          });
-        }
-      }else if(statusCode == 200){
+      if(statusCode == 200){
         resolve(res)
       }else{
         let dataType = typeof data;
         if (dataType == 'string') { data = { message: data } };
         if (extra.toastErr) {
-          util.alertSuccess(data.message,()=>{
-            extra.errBack && extra.errBack()
+          util.alert({
+              content: data.message,
+              success:()=>{
+                extra.errBack && extra.errBack()
+              }
           })
         } else {
           reject({ errType: 'err', err: data });
@@ -76,9 +75,14 @@ function request(params = {}, extra = {}){
       },
       fail: () => {
         if (extra.toastFail) {
-          util.alertSuccess(getApp().globalData.failMsg,() => { extra.failBack && extra.failBack(); })
+          util.alert({
+              content: this.failMsg,
+              success:()=>{
+                extra.failBack && extra.failBack();
+              }
+          })
         } else {
-          reject({ errType: 'fail', err: { message: getApp().globalData.failMsg} });
+          reject({ errType: 'fail', err: { message: this.failMsg} });
         }
       },
       complete: () => {
@@ -90,11 +94,7 @@ function request(params = {}, extra = {}){
   })
 }
 
-function abort(id){
-  id.abort()
+mpRequest.prototype.abort = function(id){
+    id.abort()
 }
-
-export default request;
-export {
-  abort
-}
+module.exports = mpRequest;

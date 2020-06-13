@@ -1,0 +1,15 @@
+{
+  "name": "dy-mp-util",
+  "version": "1.0.0",
+  "description": "小程序工具类",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-mp-util"
+  },
+  "author": "myjustify",
+  "license": "ISC"
+}
