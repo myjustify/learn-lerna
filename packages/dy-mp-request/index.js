@@ -64,9 +64,9 @@ mpRequest.prototype.request = function(params,extra){
         }
       }
     }
-    if (!loading && extra.showLoading){
+    if (!this.loading && extra.showLoading){
       util.showLoading()
-      loading = true
+      this.loading = true
     }
     let requestId = wx.request({
       ...params,
