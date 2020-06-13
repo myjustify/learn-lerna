@@ -1,5 +1,5 @@
 const util = require('dy-mp-util');
-
+console.log('引入dy-mp-request')
 function mpRequest(apiServer){
     this.failMsg = '网络异常，稍后重试';
     this.loading = false;
