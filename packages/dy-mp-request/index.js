@@ -13,7 +13,7 @@ mpRequest.prototype.request = function(params,extra){
     header: {},data: {},url: '',method: 'POST',
     dataType: 'json',responseType: 'text',
   }
-  params.url = apiServer + params.url;
+  params.url = this.apiServer + params.url;
   params = { ...p, ...params }
   let header = { "content-type": "application/json", ...params.header };
   /**
