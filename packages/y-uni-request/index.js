@@ -58,7 +58,7 @@ class req {
 				}
 			}
 			let id = uni.request({
-				url: 'http://localhost:8888/index.php',
+				...params,
 				success:(res)=> {
 					this.afterRequest&&this.afterRequest(res)
 				},
