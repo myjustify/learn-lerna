@@ -1,4 +1,4 @@
-import req from "@/utils/request.js";
+import req from "y-uni-request";
 let reqBody = new req();
 // reqBody.beforeRequest = ({params,extra,curPage})=>{
 // 	// reqBody.config.loading=true
