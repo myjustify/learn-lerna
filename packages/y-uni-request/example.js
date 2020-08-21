@@ -1,22 +1,23 @@
 import req from "y-uni-request";
 let reqBody = new req();
-// reqBody.beforeRequest = ({params,extra,curPage})=>{
-// 	// reqBody.config.loading=true
-// 	// extra.showLoading=false
-// 	console.log('before')
-// }
-// reqBody.afterRequest = ()=>{
-// 	console.log('after')
-// }
-// reqBody.failRequest = ()=>{
+reqBody.beforeRequest = ({params,extra,curPage})=>{
+	// reqBody.config.loading=true
+	// extra.showLoading=false
+	params.url = "http://localhost:8888/index.php"
+	// console.log('before')
+}
+reqBody.afterRequest = ({ res,resolve,reject })=>{
+	resolve(res)
+}
+// reqBody.failRequest = ({ err,resolve,reject })=>{
 // 	console.log('fail')
 // }
-// reqBody.completeRequest = (res)=>{
+// reqBody.completeRequest = ({ res,resolve,reject })=>{
 // 	console.log(res)
 // }
 const api = {
 	index(params={},extra={}){
-		reqBody.request(params,extra)
+		return reqBody.request(params,extra)
 	},
 	clearCurPageReq(){
 		reqBody.clearCurPageReq();

@@ -60,10 +60,10 @@ class req {
 			let id = uni.request({
 				...params,
 				success:(res)=> {
-					this.afterRequest&&this.afterRequest(res)
+					this.afterRequest&&this.afterRequest({res,resolve,reject})
 				},
 				fail:(err)=> {
-					this.failRequest&&this.failRequest(err)
+					this.failRequest&&this.failRequest({err,resolve,reject})
 				},
 				complete:(res)=> {
 					if (extra.showLoading) {
@@ -77,7 +77,7 @@ class req {
 						this.reqIds[curPage].delete(id);
 					}
 					
-					this.completeRequest&&this.completeRequest(res)
+					this.completeRequest&&this.completeRequest({res,resolve,reject})
 				}
 			})
 			
