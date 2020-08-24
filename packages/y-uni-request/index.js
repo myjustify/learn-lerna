@@ -6,11 +6,13 @@
 class req {
 	constructor() {
 		// reqIds "页面路径": new Set()  Set存页所有请求(请求中)
-		this.reqIds = {}
+		this.reqIds = {};
 		// reqWait{ curPage:'',fn: fn}
-		this.reqWait =[]
+		this.reqWait =[];
 		// 各个页面需要loading的请求数量 "页面路径": 0
-		this.loadings = {}
+		this.loadings = {};
+		// 400毫秒后如果请求没结束 loding提示
+		this.startLoadingTime = 400;
 		
 		// 请求最多10条 否则放入等待数组
 		while(this.reqWait.length&&this.getLen()<10){
@@ -53,17 +55,20 @@ class req {
 			if (extra.showLoading){
 				if(!this.loadings[curPage]) this.loadings[curPage] = 0;
 				this.loadings[curPage] = this.loadings[curPage]+1;
-				if(this.loadings[curPage]==1){
-					uni.showLoading({ title:extra.loadingText||"加载中...",mask:true })
-				}
+				// startLoadingTime毫秒后如果请求没结束 loding提示
+				setTimeout(()=>{
+					if(this.loadings[curPage]==1){
+						uni.showLoading({ title:extra.loadingText||"加载中...",mask:true })	
+					}
+				},this.startLoadingTime)
 			}
 			let id = uni.request({
 				...params,
 				success:(res)=> {
-					this.afterRequest&&this.afterRequest({res,resolve,reject})
+					this.afterRequest&&this.afterRequest({res,resolve,reject,params,extra})
 				},
 				fail:(err)=> {
-					this.failRequest&&this.failRequest({err,resolve,reject})
+					this.failRequest&&this.failRequest({err,resolve,reject,params,extra})
 				},
 				complete:(res)=> {
 					if (extra.showLoading) {
@@ -77,7 +82,7 @@ class req {
 						this.reqIds[curPage].delete(id);
 					}
 					
-					this.completeRequest&&this.completeRequest({res,resolve,reject})
+					this.completeRequest&&this.completeRequest({res,resolve,reject,params,extra})
 				}
 			})
 			
