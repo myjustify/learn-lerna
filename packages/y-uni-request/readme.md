@@ -6,13 +6,13 @@ reqBody.beforeRequest = ({params,extra,curPage})=>{
 	params.url = "http://localhost:8888/index.php"
 	// console.log('before')
 }
-reqBody.afterRequest = ({ res,resolve,reject })=>{
+reqBody.afterRequest = ({ res,resolve,reject,params,extra })=>{
 	resolve(res)
 }
-// reqBody.failRequest = ({ err,resolve,reject })=>{
+// reqBody.failRequest = ({ err,resolve,reject,params,extra })=>{
 // 	console.log('fail')
 // }
-// reqBody.completeRequest = ({ res,resolve,reject })=>{
+// reqBody.completeRequest = ({ res,resolve,reject,params,extra })=>{
 // 	console.log(res)
 // }
 const api = {
