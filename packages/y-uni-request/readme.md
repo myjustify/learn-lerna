@@ -1,4 +1,4 @@
-import req from "y-uni-request";
+`import req from "y-uni-request";
 let reqBody = new req();
 reqBody.beforeRequest = ({params,extra,curPage})=>{
 	// reqBody.config.loading=true
@@ -23,4 +23,4 @@ const api = {
 		reqBody.clearCurPageReq();
 	}
 }
-module.exports = api;
+module.exports = api;`
