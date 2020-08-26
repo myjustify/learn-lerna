@@ -10,7 +10,13 @@
     "type": "git",
     "url": "https://github.com/myjustify/learn-lerna/tree/master/packages/y-uni-request"
   },
-  "keywords": [],
+  "keywords": [
+    "uni-app",
+    "request",
+    "Promise",
+    "最多10个请求",
+    "loading"
+  ],
   "author": "myjustify",
   "license": "ISC"
 }
