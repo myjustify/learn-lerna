@@ -30,9 +30,8 @@ class req {
 	*/
 	request(params={},extra={}){
 		params = { data:{},method:'POST',dataType:'json',responseType:'text',...params }
-		extra = { stopType:0,baseParams:true,complatePath: false,showLoading: true,loadingText:'',toastFail: true,toastErr: false,...extra }
+		extra = { stopType:0,takeTk:true,baseParams:true,complatePath: false,showLoading: true,loadingText:'',toastFail: true,toastErr: false,...extra }
 		params.header = { "content-type": "application/json",...params.header };
-		
 		let curPage = extra.curPage||this.getCurPage()
 		if(!this.getCurPageRoutes().includes(curPage)&&extra.stopType!=1){
 			console.log(curPage+"页面已被卸载,请求未发出",params,extra)
@@ -50,7 +49,6 @@ class req {
 			
 			this.beforeRequest&&this.beforeRequest({params,extra,curPage})
 			// console.log(this.config)
-			
 			// 对loading统一管理
 			if (extra.showLoading){
 				if(!this.loadings[curPage]) this.loadings[curPage] = 0;
@@ -89,7 +87,7 @@ class req {
 			if(!this.reqIds[curPage]) this.reqIds[curPage] = new Set();
 			this.reqIds[curPage].add(id);
 			// 返回id
-			extra.getId&&extra.getId();
+			extra.getId&&extra.getId(id);
 		})
 	}
 	//获取队列中请求的数量
