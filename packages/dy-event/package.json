@@ -1,5 +1,5 @@
 {
-  "name": "y-event",
+  "name": "dy-event",
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
@@ -14,5 +14,6 @@
     "发布订阅"
   ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "gitHead": "51776d626ebb6c1600119e9fd693084bb6bc4d7e"
 }
