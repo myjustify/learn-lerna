@@ -6,10 +6,14 @@
   "scripts": {
     "test": "test"
   },
+  "keywords": [
+    "小程序request",
+    "request",
+    "Promise",
+    "最多10个请求",
+    "loading"
+  ],
   "author": "myjustify",
   "license": "ISC",
-  "homepage": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-mp-request",
-  "peerDependencies": {
-    "dy-mp-util": "^1.0.2"
-  }
+  "homepage": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-mp-request"
 }
