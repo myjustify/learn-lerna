@@ -115,7 +115,9 @@ class req {
 		return arr;
 	}
 	getCurPage(){
-		return getCurrentPages().reverse()[0].route
+		let result = ''
+		getCurrentPages().reverse().length && (result = getCurrentPages().reverse()[0].route)
+		return result
 	}
 	// 清除当前/某个页面所有请求
 	clearCurPageReq(curPage=""){
