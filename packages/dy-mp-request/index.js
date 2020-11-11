@@ -25,13 +25,17 @@ class req {
 		}
 	}
 	/*
-	* @extra stopType 请求是否能被终止 0正常模式可被终止 1不可被终止
-	* 
+	* extra.stopType 请求是否能被终止 0正常模式可被终止 1不可被终止
+	* extra.requestType request uploadFile 网络请求或者上传文件
 	*/
 	request(params={},extra={}){
-		params = { data:{},method:'POST',dataType:'json',responseType:'text',...params }
-		extra = { stopType:0,takeTk:true,baseParams:true,complatePath: false,showLoading: true,loadingText:'',toastFail: true,toastErr: false,...extra }
-		params.header = { "content-type": "application/json",...params.header };
+		extra = { requestType:'request',stopType:0,takeTk:true,baseParams:true,complatePath: false,showLoading: true,loadingText:'',toastFail: true,toastErr: false,...extra }
+		let isRequest = extra.requestType=='request'
+		let dataName = isRequest?'data':'formData'
+		let dataType = isRequest?{ method:'POST',dataType:'json',responseType:'text' }:{}
+		let header = isRequest?{ "content-type": "application/json" }:{}
+		params = { [dataName]:{},...dataType,...params }
+		params.header = { ...header,...params.header };
 		let curPage = extra.curPage||this.getCurPage()
 		if(!this.getCurPageRoutes().includes(curPage)&&extra.stopType!=1){
 			console.log(curPage+"页面已被卸载,请求未发出",params,extra)
