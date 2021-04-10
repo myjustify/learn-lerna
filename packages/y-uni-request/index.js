@@ -4,7 +4,9 @@
 // 	this.$api.index({},{ curPage,stopType:1 })
 // },2000)
 class req {
-	constructor() {
+	constructor(params={}) {
+		let { maxNum=10 } = params
+		this.maxNum = maxNum
 		// reqIds "页面路径": new Set()  Set存页所有请求(请求中)
 		this.reqIds = {};
 		// reqWait{ curPage:'',fn: fn}
@@ -13,16 +15,6 @@ class req {
 		this.loadings = {};
 		// 400毫秒后如果请求没结束 loding提示
 		this.startLoadingTime = 400;
-		
-		// 请求最多10条 否则放入等待数组
-		while(this.reqWait.length&&this.getLen()<10){
-			let item = this.reqWait[this.reqWait.length-1]
-			let curPage = item.curPage
-			if(this.getCurPage()==curPage){
-				item.fn()
-			}
-			this.reqWait.pop()
-		}
 	}
 	/*
 	* extra.stopType 请求是否能被终止 0正常模式可被终止 1不可被终止
@@ -36,16 +28,18 @@ class req {
 		let header = isRequest?{ "content-type": "application/json" }:{}
 		params = { [dataName]:{},...dataType,...params }
 		params.header = { ...header,...params.header };
-		let curPage = extra.curPage||this.getCurPage()
-		if(!this.getCurPageRoutes().includes(curPage)&&extra.stopType!=1){
+		let routes = this.getCurPageRoutes()
+		let curPage = extra.curPage||routes.reverse()[0]
+		if(!routes.includes(curPage)&&extra.stopType!=1){
 			console.log(curPage+"页面已被卸载,请求未发出",params,extra)
 			return;
 		}
-		if(this.getLen()>=10){
-			// console.log(this.getLen())
+		if(this.getLen()>=this.maxNum){
 			this.reqWait.push({
 				curPage,
-				fn: this.request(params,extra)
+				fn: ()=>{
+					return this.request(params,extra)
+				}
 			})
 			return;
 		}
@@ -85,9 +79,18 @@ class req {
 					}
 					
 					this.completeRequest&&this.completeRequest({res,resolve,reject,params,extra})
+					
+					// 基础库1.4.0微信已经将并发this.maxNum的限制去掉 这里可以去掉
+					// 请求最多this.maxNum条 否则放入等待数组
+					if(this.getLen()<this.maxNum && this.reqWait.length){
+						let item = this.reqWait.shift()
+						if(curPage == item.curPage){
+							item.fn()
+						}
+					}
+					
 				}
 			})
-			
 			if(!this.reqIds[curPage]) this.reqIds[curPage] = new Set();
 			this.reqIds[curPage].add(id);
 			// 返回id
@@ -101,6 +104,7 @@ class req {
 		let arr = Object.keys(reqIds);
 		for(let i=0;i<arr.length;i++){
 			let item = reqIds[arr[i]];
+			len = len + item.size
 		}
 		return len;
 	}
@@ -120,7 +124,8 @@ class req {
 	}
 	getCurPage(){
 		let result = ''
-		getCurrentPages().reverse().length && (result = getCurrentPages().reverse()[0].route)
+		let routes = getCurrentPages().reverse()
+		routes.length && (result = routes[0].route)
 		return result
 	}
 	// 清除当前/某个页面所有请求
