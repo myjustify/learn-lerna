@@ -1,10 +1,11 @@
+// 基础库1.4.0微信已经将并发10的限制去掉
 // 延迟的请求需带上当前页面路由
 // this.$api.index({})
 // setTimeout(()=>{
 // 	this.$api.index({},{ curPage,stopType:1 })
 // },2000)
 class req {
-	constructor() {
+	constructor(params={}) {
 		// reqIds "页面路径": new Set()  Set存页所有请求(请求中)
 		this.reqIds = {};
 		// reqWait{ curPage:'',fn: fn}
@@ -13,16 +14,6 @@ class req {
 		this.loadings = {};
 		// 400毫秒后如果请求没结束 loding提示
 		this.startLoadingTime = 400;
-		
-		// 请求最多10条 否则放入等待数组
-		while(this.reqWait.length&&this.getLen()<10){
-			let item = this.reqWait[this.reqWait.length-1]
-			let curPage = item.curPage
-			if(this.getCurPage()==curPage){
-				item.fn()
-			}
-			this.reqWait.pop()
-		}
 	}
 	/*
 	* extra.stopType 请求是否能被终止 0正常模式可被终止 1不可被终止
@@ -36,17 +27,10 @@ class req {
 		let header = isRequest?{ "content-type": "application/json" }:{}
 		params = { [dataName]:{},...dataType,...params }
 		params.header = { ...header,...params.header };
-		let curPage = extra.curPage||this.getCurPage()
-		if(!this.getCurPageRoutes().includes(curPage)&&extra.stopType!=1){
+		let routes = this.getCurPageRoutes()
+		let curPage = extra.curPage||routes.reverse()[0]
+		if(!routes.includes(curPage)&&extra.stopType!=1){
 			console.log(curPage+"页面已被卸载,请求未发出",params,extra)
-			return;
-		}
-		if(this.getLen()>=10){
-			// console.log(this.getLen())
-			this.reqWait.push({
-				curPage,
-				fn: this.request(params,extra)
-			})
 			return;
 		}
 		return new Promise((resolve,reject)=>{
@@ -64,7 +48,7 @@ class req {
 					}
 				},this.startLoadingTime)
 			}
-			let id = wx.request({
+			let id = wx[extra.requestType]({
 				...params,
 				success:(res)=> {
 					this.afterRequest&&this.afterRequest({res,resolve,reject,params,extra})
@@ -83,26 +67,14 @@ class req {
 					if(this.reqIds[curPage]&&this.reqIds[curPage].has(id)){
 						this.reqIds[curPage].delete(id);
 					}
-					
 					this.completeRequest&&this.completeRequest({res,resolve,reject,params,extra})
 				}
 			})
-			
 			if(!this.reqIds[curPage]) this.reqIds[curPage] = new Set();
 			this.reqIds[curPage].add(id);
 			// 返回id
 			extra.getId&&extra.getId(id);
 		})
-	}
-	//获取队列中请求的数量
-	getLen(){
-		let reqIds = this.reqIds
-		let len = 0;
-		let arr = Object.keys(reqIds);
-		for(let i=0;i<arr.length;i++){
-			let item = reqIds[arr[i]];
-		}
-		return len;
 	}
 	abort(curPage,id){
 	  let reqIds = this.reqIds
@@ -120,22 +92,18 @@ class req {
 	}
 	getCurPage(){
 		let result = ''
-		getCurrentPages().reverse().length && (result = getCurrentPages().reverse()[0].route)
+		let routes = getCurrentPages().reverse()
+		routes.length && (result = routes[0].route)
 		return result
 	}
 	// 清除当前/某个页面所有请求
 	clearCurPageReq(curPage=""){
 		curPage = curPage||this.getCurPage();
 		let reqIds = this.reqIds;
-		let reqWait = this.reqWait;
-		reqWait.map(item=>{
-			return item.curPage!=curPage;
-		})
 		reqIds[curPage]&&reqIds[curPage].forEach(item=>{
 			this.abort(curPage,item);
 		})
 		delete reqIds[curPage];
-		this.reqWait = reqWait;
 		this.reqIds = reqIds;
 	}
 }

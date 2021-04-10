@@ -1,3 +1,4 @@
+// 基础库1.4.0微信已经将并发10的限制去掉
 // 延迟的请求需带上当前页面路由
 // this.$api.index({})
 // setTimeout(()=>{
@@ -5,8 +6,6 @@
 // },2000)
 class req {
 	constructor(params={}) {
-		let { maxNum=10 } = params
-		this.maxNum = maxNum
 		// reqIds "页面路径": new Set()  Set存页所有请求(请求中)
 		this.reqIds = {};
 		// reqWait{ curPage:'',fn: fn}
@@ -32,15 +31,6 @@ class req {
 		let curPage = extra.curPage||routes.reverse()[0]
 		if(!routes.includes(curPage)&&extra.stopType!=1){
 			console.log(curPage+"页面已被卸载,请求未发出",params,extra)
-			return;
-		}
-		if(this.getLen()>=this.maxNum){
-			this.reqWait.push({
-				curPage,
-				fn: ()=>{
-					return this.request(params,extra)
-				}
-			})
 			return;
 		}
 		return new Promise((resolve,reject)=>{
@@ -77,18 +67,7 @@ class req {
 					if(this.reqIds[curPage]&&this.reqIds[curPage].has(id)){
 						this.reqIds[curPage].delete(id);
 					}
-					
 					this.completeRequest&&this.completeRequest({res,resolve,reject,params,extra})
-					
-					// 基础库1.4.0微信已经将并发this.maxNum的限制去掉 这里可以去掉
-					// 请求最多this.maxNum条 否则放入等待数组
-					if(this.getLen()<this.maxNum && this.reqWait.length){
-						let item = this.reqWait.shift()
-						if(curPage == item.curPage){
-							item.fn()
-						}
-					}
-					
 				}
 			})
 			if(!this.reqIds[curPage]) this.reqIds[curPage] = new Set();
@@ -96,17 +75,6 @@ class req {
 			// 返回id
 			extra.getId&&extra.getId(id);
 		})
-	}
-	//获取队列中请求的数量
-	getLen(){
-		let reqIds = this.reqIds
-		let len = 0;
-		let arr = Object.keys(reqIds);
-		for(let i=0;i<arr.length;i++){
-			let item = reqIds[arr[i]];
-			len = len + item.size
-		}
-		return len;
 	}
 	abort(curPage,id){
 	  let reqIds = this.reqIds
@@ -132,15 +100,10 @@ class req {
 	clearCurPageReq(curPage=""){
 		curPage = curPage||this.getCurPage();
 		let reqIds = this.reqIds;
-		let reqWait = this.reqWait;
-		reqWait.map(item=>{
-			return item.curPage!=curPage;
-		})
 		reqIds[curPage]&&reqIds[curPage].forEach(item=>{
 			this.abort(curPage,item);
 		})
 		delete reqIds[curPage];
-		this.reqWait = reqWait;
 		this.reqIds = reqIds;
 	}
 }
