@@ -43,7 +43,7 @@ class req {
 				this.loadings[curPage] = this.loadings[curPage]+1;
 				// startLoadingTime毫秒后如果请求没结束 loding提示
 				setTimeout(()=>{
-					if(this.loadings[curPage]==1){
+					if(this.loadings[curPage]>=1){
 						uni.showLoading({ title:extra.loadingText||"加载中...",mask:true })	
 					}
 				},this.startLoadingTime)
@@ -59,7 +59,7 @@ class req {
 				complete:(res)=> {
 					if (extra.showLoading) {
 						this.loadings[curPage] = this.loadings[curPage] - 1;
-						if(this.loadings[curPage]==0){
+						if(this.loadings[curPage]<=0){
 							uni.hideLoading()
 						}
 					}
