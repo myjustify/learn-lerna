@@ -1,0 +1,20 @@
+{
+  "name": "y-uni-route",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+      "uni-app",
+      "小程序",
+      "路由拦截"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myjustify/learn-lerna/tree/master/packages/y-uni-route"
+  },
+  "author": "myjustify",
+  "license": "ISC"
+}
