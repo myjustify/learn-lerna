@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-      "uni-app",
-      "小程序",
-      "路由拦截"
+    "uni-app",
+    "小程序",
+    "路由拦截"
   ],
   "repository": {
     "type": "git",
