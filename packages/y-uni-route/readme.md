@@ -1,6 +1,7 @@
 ## 安装
 
-import y-uni-route from 'y-uni-route';
+import yUniRoute from 'y-uni-route';
+yUniRoute();
 
 ## 路由拦截
 
