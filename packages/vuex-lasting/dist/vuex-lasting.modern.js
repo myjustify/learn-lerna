@@ -1,0 +1,2 @@
+import*as t from"shvl";function e(e={}){return r=>{let{key:a,opt:o,paths:s=[]}=e;a=a||"lasting",o=o||{set:(t,e)=>{try{e=JSON.stringify(e)}catch(t){console.warn("lasting set err:",t)}return localStorage.setItem(`${a}-${t}`,e)},get:t=>{let e=localStorage.getItem(`${a}-${t}`);try{e=JSON.parse(e)}catch(t){console.warn("lasting get err:",t)}return e},rm:t=>localStorage.removeItem(`${a}-${t}`)};for(let e=0;e<s.length;e++){const a=s[e],l=o.get(a);l&&t.set(r.state,a,l),r.watch(e=>t.get(e,a),t=>{o.set(a,t)})}}}export{e as default};
+//# sourceMappingURL=vuex-lasting.modern.js.map

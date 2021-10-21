@@ -1,0 +1,36 @@
+{
+  "name": "vuex-lasting",
+  "version": "1.0.0",
+  "description": "vuex lasting",
+  "main": "dist/vuex-lasting.js",
+  "module": "dist/vuex-lasting.mjs",
+  "unpkg": "dist/vuex-lasting.umd.js",
+  "source": "index.js",
+  "scripts": {
+    "build": "microbundle"
+  },
+  "bundlesize": [
+    {
+      "path": "./dist/*.js",
+      "threshold": "300b"
+    }
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  },
+  "keywords": [
+    "状态持久化",
+    "vuex-lasting",
+    "dot notation",
+    "dot"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "microbundle": "^0.14.1"
+  }
+}
