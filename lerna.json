@@ -1,4 +1,9 @@
 {
+  "command": {
+    "publish": {
+      "ignoreChanges": ["dy-event", "y-utils"]
+    }
+  },
   "packages": [
     "packages/*"
   ],
