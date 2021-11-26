@@ -30,7 +30,7 @@ export default function lasting(options = {}) {
     for (let i = 0; i < paths.length; i++) {
       const son = paths[i];
       const sv = opt.get(son);
-      sv && shvl.set(store.state, son, sv);
+      ( sv !== undefined && sv !== null ) && shvl.set(store.state, son, sv);
       store.watch(
         (state) => shvl.get(state, son),
         (v) => {
