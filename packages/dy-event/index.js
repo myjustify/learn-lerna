@@ -1,6 +1,6 @@
-// 全局的 event 对象, 提供 on, off, emit 方法  
-var event = (function () {
-    eventObjs = {};
+// 全局的 event 对象, 提供 on, off, emit 方法
+const event = (function () {
+    let eventObjs = {};
 
     return {
         /** 注册事件, 可以连续注册, 可以注册多个事件 */
@@ -10,8 +10,8 @@ var event = (function () {
 
         },
 
-        /** 移除事件, 
-         * - 如果没有参数, 移除所有事件, 
+        /** 移除事件,
+         * - 如果没有参数, 移除所有事件,
          * - 如果只带有 事件名 参数, 就移除这个事件名下的所有事件,
          * - 如果带有 两个 参数, 那么就是表示移除某一个事件的具体处理函数
          * */
@@ -33,7 +33,7 @@ var event = (function () {
             }
         },
 
-        /** 
+        /**
          * 发射事件, 触发事件, 包装参数 传递给事件处理函数
         */
         emit: function (type) {
@@ -49,4 +49,5 @@ var event = (function () {
         },
     }
 }());
+
 module.exports = event;

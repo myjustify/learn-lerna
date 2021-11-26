@@ -10,7 +10,7 @@ export function pickExclude(obj = {}, keys = []) {
     }, {});
 }
 // 提出keys中存在的数据
-export function pickIxclude(obj = {}, keys = []) {
+export function pickInclude(obj = {}, keys = []) {
     return Object.keys(obj).reduce((prev, key) => {
         console.log(prev, key)
         if (keys.includes(key)) {
