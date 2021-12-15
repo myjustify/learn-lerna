@@ -1,11 +1,10 @@
-import ejs from 'ejs'
-import { getFilePath } from '../lib/util.js'
-import fsExtra  from 'fs-extra'
-
-const str = `<template>
+export default `<template>
   <div>
+    <%_ if (grCollapse) { -%>
     <gr-collapse>
       <template v-slot:filter>
+    <%_ } -%>
+        <%_ if (filterForm) { -%>
         <filter-form
           label-width="100px"
           :inline="true"
@@ -16,8 +15,12 @@ const str = `<template>
           @onSearch="handleSearch"
           @onReset="handleReset"
         />
+        <%_ } -%>
+      <%_ if (grCollapse) { -%>
       </template>
       <template>
+      <%_ } -%>
+        <%_ if (grTable) { -%>
         <gr-table
           ref="filterTable"
           :request-func="getOrderList"
@@ -25,8 +28,11 @@ const str = `<template>
           :default-sort="defaultSort"
         >
         </gr-table>
+        <%_ } -%>
+    <%_ if (grCollapse) { -%>
       </template>
     </gr-collapse>
+    <%_ } -%>
 
     <%_ if (hasDialog) { -%>
     <template v-if="dialogShow">
@@ -37,33 +43,32 @@ const str = `<template>
   </div>
 </template>
 <script>
-import FilterForm from '@/components/FilterForm/index'
-import GrForm from '@/components/GrForm/index'
-import GrCollapse from '@/components/Collapse/FilterCollapase'
-import GrTable from '@/components/GrTable/index'
 export default {
   name: '<%= name %>',
-  components: { FilterForm, GrCollapse, GrTable, GrForm },
   data() {
     return {
       <%_ if (hasDialog) { -%>
-      dialogShow: false,
-      dialogName: '',
-      rowData: {},
+      dialogShow: false
+      ,dialogName: ''
+      ,rowData: {}
       <%_ } -%>
       
-      defaultSort: { createdTime: 'DESC' },
-      formInfo: {
+      <%_ if (filterForm) { -%>
+      ,formInfo: {
         data: {
         },
         fieldList: [
         ]
-      },
-      listTypeInfo: {
-      },
-      extraBtn: [
-      ],
-      pageTableData: [
+      }
+      ,listTypeInfo: {
+      }
+      <%_ } -%>
+      
+      <%_ if (grTable) { -%>
+      ,defaultSort: { createdTime: 'DESC' }
+      ,extraBtn: [
+      ]
+      ,pageTableData: [
         {
           label: '操作',
           fixed: 'right',
@@ -72,33 +77,33 @@ export default {
           operator: [
           ]
         }
-      ],
-      getOrderList: function({ param }, callback) {
-        callback([])
-      }
+      ]
+      <%_ } -%>
     }
   },
   created() {
   },
   methods: {
+    <%_ if (filterForm) { -%>
     handleReset() {
       this.handleSearch()
-    },
-    handleSearch() {
+    }
+    ,handleSearch() {
       const params = { ...this.formInfo.data }
       this.$refs.filterTable.handleSearch(params)
     }
+    <%_ } -%>
+    <%_ if (hasDialog) { -%>
+    ,dialogToggle(rowData={}) {
+      this.dialogShow = !this.dialogShow
+      this.rowData = rowData
+    }
+    <%_ } -%>
+    <%_ if (grTable) { -%>
+    ,getOrderList: function({ param }, callback) {
+      callback([])
+    }
+    <%_ } -%>
   }
 }
 </script>`
-export default async function ({ hasDialog=false, name, target }={}) {
-  if (!target) console.error('创建路径未填')
-  const result = ejs.render(str, { hasDialog, name });
-  try {
-    const fileName = getFilePath(target)
-    console.log('创建: '+ fileName)
-    return fsExtra.outputFileSync(fileName, result)
-  }catch (err) {
-    console.log(err)
-  }
-}
