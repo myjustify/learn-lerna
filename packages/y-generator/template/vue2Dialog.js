@@ -56,7 +56,7 @@ export default `<template>
           fieldList: [
           ]
         }
-        ,listTypeInfo: []
+        ,listTypeInfo: {}
         <%_ } -%>
         <%_ if (grTable) { -%>
         ,defaultSort: { createdTime: 'DESC' }
@@ -77,7 +77,7 @@ export default `<template>
     },
     methods: {
       toggle(){
-        this.isShow = !this.isShow
+        this.dialogShow = !this.dialogShow
       },
       handleSearch(){
         this.$emit('handleSearch')
