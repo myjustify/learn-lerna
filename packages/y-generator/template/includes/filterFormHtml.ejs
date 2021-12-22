@@ -1,0 +1,10 @@
+<filter-form
+    label-width="100px"
+    :inline="true"
+    :field-list="formInfo.fieldList"
+    :data="formInfo.data"
+    :list-type-info="listTypeInfo"
+    :ref-obj.sync="formInfo.ref"
+    @onSearch="handleSearch"
+    @onReset="handleReset"
+/>

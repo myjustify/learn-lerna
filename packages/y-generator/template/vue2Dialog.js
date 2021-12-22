@@ -1,21 +1,11 @@
+import { includes } from './componentsTem.js'
 export default `<template>
   <gr-dialog :is-show.sync="dialogShow" :title="title" :dialog-but-item-list="btnList">
     <%_ if (grForm) { -%>
-    <gr-form
-      :field-list="formInfo.fieldList"
-      :data="formInfo.data"
-      :ref-obj.sync="formInfo.ref"
-      :list-type-info="listTypeInfo"
-    />
+    ${ includes.grFormHtml }
     <%_ } -%>
     <%_ if (grTable) { -%>
-    <gr-table
-      ref="filterTable"
-      :request-func="getOrderList"
-      :table-data="pageTableData"
-      :default-sort="defaultSort"
-    >
-    </gr-table>
+    ${ includes.tableHtml }
     <%_ } -%>
   </gr-dialog>
 </template>
@@ -39,40 +29,16 @@ export default `<template>
     },
     data(){
       return {
-        title: '<%= title %>'
-        ,dialogShow: true
-        ,btnList: [
+        title: '<%= title %>',
+        dialogShow: true,
+        btnList: [
           {
             buttonName: '确定',
             handleClick: () => {
             }
           }
-        ]
-        <%_ if (grForm) { -%>
-        ,formInfo: {
-          ref: null,
-          data: {
-          },
-          fieldList: [
-          ]
-        }
-        ,listTypeInfo: {}
-        <%_ } -%>
-        <%_ if (grTable) { -%>
-        ,defaultSort: { createdTime: 'DESC' }
-        ,extraBtn: [
-        ]
-        ,pageTableData: [
-          {
-            label: '操作',
-            fixed: 'right',
-            name: 'validEnd',
-            width: '150',
-            operator: [
-            ]
-          }
-        ]
-        <%_ } -%>
+        ],
+        <%- data %>
       }
     },
     methods: {
@@ -81,11 +47,11 @@ export default `<template>
       },
       handleSearch(){
         this.$emit('handleSearch')
-      }
+      },
       <%_ if (grTable) { -%>
-      ,getOrderList: function({ param }, callback) {
+      getOrderList: function({ param }, callback) {
         callback([])
-      }
+      },
       <%_ } -%>
     }
   }
