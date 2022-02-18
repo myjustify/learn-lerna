@@ -28,7 +28,7 @@ export const includes = {
     callback([])
   },
   handleSearch() {
-    this.$refs.filterTable.handleSearch()
+    this.$refs.tableRef.handleSearch()
   }`,
   dialogData: `dialogShow: false,
   dialogName: '',
