@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "rmNodeModule": "index.js"
+    "rmNodeModules": "index.js"
   },
   "main": "index.js",
   "scripts": {

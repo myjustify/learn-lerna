@@ -1,3 +1,3 @@
-<template v-if="dialogShow">
-    <component :is="dialogName" :is-show.sync="dialogShow" :row-data="rowData" @handleSearch="handleSearch"></component>
+<template v-if="dialogProps.dialogShow">
+    <component :is="dialogProps.dialogName" :is-show.sync="dialogProps.dialogShow" :row-data="dialogProps.rowData" @handleSearch="handleSearch"></component>
 </template>

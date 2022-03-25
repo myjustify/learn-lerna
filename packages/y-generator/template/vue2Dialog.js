@@ -1,6 +1,6 @@
 import { includes } from './componentsTem.js'
 export default `<template>
-  <gr-dialog :is-show.sync="dialogShow" :title="title" :dialog-but-item-list="btnList">
+  <gr-dialog :is-show.sync="dialogShow" :title="title" :dialog-but-item-list="btnList" :appendToBody="true">
     <%_ if (grForm) { -%>
     ${ includes.grFormHtml }
     <%_ } -%>

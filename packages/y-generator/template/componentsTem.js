@@ -30,12 +30,14 @@ export const includes = {
   handleSearch() {
     this.$refs.tableRef.handleSearch()
   }`,
-  dialogData: `dialogShow: false,
-  dialogName: '',
-  rowData: {}`,
+  dialogData: `dialogProps: {
+    dialogShow: false,
+    dialogName: '',
+    rowData: {}
+  }`,
   dialogMethods: `dialogToggle(rowData={}) {
-    this.dialogShow = !this.dialogShow
-    this.rowData = rowData
+    this.dialogProps.dialogShow = !this.dialogProps.dialogShow
+    this.dialogProps.rowData = rowData
   }`,
   filterFormData: `formInfo: {
     ref: null,
