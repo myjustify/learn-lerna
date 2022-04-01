@@ -35,7 +35,8 @@ export const includes = {
     dialogName: '',
     rowData: {}
   }`,
-  dialogMethods: `dialogToggle(rowData={}) {
+  dialogMethods: `dialogToggle(rowData={}, dialogName) {
+    dialogName && (this.dialogProps.dialogName = dialogName)
     this.dialogProps.dialogShow = !this.dialogProps.dialogShow
     this.dialogProps.rowData = rowData
   }`,
