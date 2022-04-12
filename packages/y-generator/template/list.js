@@ -4,6 +4,8 @@ import ejs from 'ejs'
 import { getFilePath } from '../lib/util.js'
 import fsExtra from 'fs-extra'
 import { generatorData, generatorMethods } from './componentsTem.js'
+import vue3Page from './vue3Page.js'
+import vue3Dialog from './vue3Dialog.js'
 
 export function generator ( code) {
   return async (options={}) => {
@@ -22,5 +24,7 @@ export function generator ( code) {
 
 export default {
   vue2Page: generator(vue2Page),
-  vue2Dialog: generator(vue2Dialog)
+  vue2Dialog: generator(vue2Dialog),
+  vue3Page: generator(vue3Page),
+  vue3Dialog: generator(vue3Dialog)
 }

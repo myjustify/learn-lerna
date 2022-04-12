@@ -1,0 +1,7 @@
+<filter-form
+    ref="filterFormRef"
+    v-model="filterFormInfo.data"
+    :form-items="filterFormInfo.formItem"
+    @on-submit="handleSearch"
+    @on-reset="handleSearch"
+/>

@@ -1,0 +1,8 @@
+<template v-if="dialogProps.dialogShow">
+    <component
+        :is="dialogCom[dialogProps.dialogName]"
+        ref="dialogRef"
+        v-model:isShow="dialogProps.dialogShow"
+        :row-data="dialogProps.rowData"
+    />
+</template>

@@ -5,6 +5,8 @@ import list from './template/list.js'
 import vue2PagePrompt from './prompts/vue2PagePrompt.js'
 import {genPrompt} from './lib/util.js'
 import vue2DialogPrompt from './prompts/vue2DialogPrompt.js'
+import vue3PagePrompt from './prompts/vue3PagePrompt.js'
+import vue3DialogPrompt from './prompts/vue3DialogPrompt.js'
 const program = new Command()
 
 program
@@ -24,6 +26,8 @@ async function chooseTemplate() {
       name: 'template',
       message: 'choose a template',
       choices: [
+        'vue3Page',
+        'vue3Dialog',
         'vue2Page',
         'vue2Dialog'
       ],
@@ -42,6 +46,14 @@ async function genTemplate(template) {
     case 'vue2Dialog':
       options = await genPrompt(vue2DialogPrompt)
       await list.vue2Dialog(options)
+      break
+    case 'vue3Page':
+      options = await genPrompt(vue3PagePrompt)
+      await list.vue3Page(options)
+      break
+    case 'vue3Dialog':
+      options = await genPrompt(vue3DialogPrompt)
+      await list.vue3Dialog(options)
       break
     default:
       console.log('has no this template')
