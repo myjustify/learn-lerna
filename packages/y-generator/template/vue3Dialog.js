@@ -123,7 +123,7 @@ watch(
         label: 'aaa',
         type: 'primary',
         click(e) {
-          dialogToggle('uploadExcel', {})
+          console.log(e)
         }
       }
     ],
@@ -150,7 +150,7 @@ onMounted(() => {
 
 <%_ if (filterForm) { -%>
   function handleSearch() {
-    commonTableRef.value.fetchFunc()
+    commonTableRef.value.fetchData()
   }
 <%_ } -%>
 

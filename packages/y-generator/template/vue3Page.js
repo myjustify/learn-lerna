@@ -90,7 +90,7 @@ const comName = ref('<%= name %>')
 
 <%_ if (filterForm) { -%>
   function handleSearch() {
-    commonTableRef.value.fetchFunc()
+    commonTableRef.value.fetchData()
   }
 <%_ } -%>
 
