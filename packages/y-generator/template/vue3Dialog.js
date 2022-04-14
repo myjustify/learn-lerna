@@ -63,13 +63,6 @@ const dialogData = reactive({
   title: '<%= title %>',
   btnList: [
     {
-      label: '关闭',
-      type: 'default',
-      click: () => {
-        toggleDialog()
-      }
-    },
-    {
       label: '确定',
       type: 'primary',
       click: () => {
