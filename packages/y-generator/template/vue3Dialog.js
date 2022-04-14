@@ -65,14 +65,14 @@ const dialogData = reactive({
     {
       label: '关闭',
       type: 'default',
-      handleClick: () => {
+      click: () => {
         toggleDialog()
       }
     },
     {
       label: '确定',
       type: 'primary',
-      handleClick: () => {
+      click: () => {
         confirm()
         toggleDialog()
       }

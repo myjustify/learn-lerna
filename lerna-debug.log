@@ -1,0 +1,10 @@
+15 error Error: Command failed with exit code 1: git remote update
+15 error fatal: 无法访问 'https://github.com/myjustify/learn-lerna.git/'：LibreSSL SSL_connect: Operation timed out in connection to github.com:443
+15 error error: 不能获取 origin
+15 error 正在获取 origin
+15 error     at makeError (/Users/yongduan/.nvm/versions/node/v14.18.0/lib/node_modules/lerna/node_modules/execa/lib/error.js:60:11)
+15 error     at Function.module.exports.sync (/Users/yongduan/.nvm/versions/node/v14.18.0/lib/node_modules/lerna/node_modules/execa/index.js:194:17)
+15 error     at Object.execSync (/Users/yongduan/.nvm/versions/node/v14.18.0/lib/node_modules/lerna/node_modules/@lerna/child-process/index.js:39:16)
+15 error     at updateRemote (/Users/yongduan/.nvm/versions/node/v14.18.0/lib/node_modules/lerna/node_modules/@lerna/version/lib/is-behind-upstream.js:34:16)
+15 error     at isBehindUpstream (/Users/yongduan/.nvm/versions/node/v14.18.0/lib/node_modules/lerna/node_modules/@lerna/version/lib/is-behind-upstream.js:16:3)
+15 error     at VersionCommand.initialize (/Users/yongduan/.nvm/versions/node/v14.18.0/lib/node_modules/lerna/node_modules/@lerna/version/index.js:153:9)
