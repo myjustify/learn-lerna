@@ -58,35 +58,6 @@ defineProps({
 
 const comName = ref('<%= name %>')
 const emit = defineEmits(['confirm', 'cancel', 'update:isShow'])
-const dialogData = reactive({
-  dialogShow: true,
-  title: '<%= title %>',
-  btnList: [
-    {
-      label: '关闭',
-      type: 'default',
-      click: () => {
-        toggleDialog()
-      }
-    },
-    {
-      label: '确定',
-      type: 'primary',
-      click: () => {
-        confirm()
-        toggleDialog()
-      }
-    }
-  ]
-})
-
-watch(
-  () => dialogData.dialogShow,
-  val => {
-    emit('update:isShow', val)
-  }
-)
-
 <%_ if (wbForm) { -%>
   const formInfo = reactive({
     data: {
@@ -146,6 +117,35 @@ watch(
     }
   })
 <%_ } -%>
+
+const dialogData = reactive({
+  dialogShow: true,
+  title: '<%= title %>',
+  btnList: [
+    {
+      label: '关闭',
+      type: 'default',
+      click: () => {
+        toggleDialog()
+      }
+    },
+    {
+      label: '确定',
+      type: 'primary',
+      click: () => {
+        confirm()
+        toggleDialog()
+      }
+    }
+  ]
+})
+
+watch(
+  () => dialogData.dialogShow,
+  val => {
+    emit('update:isShow', val)
+  }
+)
 
 onMounted(() => {
   console.log(comName.value + 'onMounted')
