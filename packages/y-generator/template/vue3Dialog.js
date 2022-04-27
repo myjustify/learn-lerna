@@ -29,7 +29,7 @@ import WbDialog from '@/components/base/WbDialog/index.vue'
   import WbForm from '@/components/commonForm/WbForm'
 <%_ } -%>
 <%_ if (filterForm) { -%>
-  import FilterForm from '@/components/filterForm/indexNew.vue'
+  import FilterForm from '@/components/filterForm/index.vue'
 <%_ } -%>
 <%_ if (table) { -%>
   import CommonTable from '@/components/commonTable/index.vue'

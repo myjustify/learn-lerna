@@ -22,7 +22,7 @@ export default {
 </script>
 <script setup>
 <%_ if (filterForm) { -%>
-  import FilterForm from '@/components/filterForm/indexNew.vue'
+  import FilterForm from '@/components/filterForm/index.vue'
 <%_ } -%>
 <%_ if (table) { -%>
   import CommonTable from '@/components/commonTable/index.vue'
@@ -38,6 +38,11 @@ export default {
   const dialogRef = ref(null)
   const dialogCom = reactive({
     // uploadExcel: defineAsyncComponent(() => import('@/views/fund/payment/entrustTransportPayment/uploadExcel.vue'))
+  })
+  const dialogProps = reactive({
+    dialogName: '',
+    dialogShow: false,
+    rowData: {}
   })
 <%_ } -%>
 
@@ -95,12 +100,6 @@ const comName = ref('<%= name %>')
 <%_ } -%>
 
 <%_ if (hasDialog) { -%>
-  const dialogProps = reactive({
-    dialogName: '',
-    dialogShow: false,
-    rowData: {}
-  })
-  
   function dialogToggle(name, rowData = {}) {
     dialogProps.dialogName = name
     dialogProps.rowData = { ...rowData }
