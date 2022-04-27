@@ -32,7 +32,7 @@ import WbDialog from '@/components/base/WbDialog/index.vue'
   import FilterForm from '@/components/filterForm/index.vue'
 <%_ } -%>
 <%_ if (table) { -%>
-  import CommonTable from '@/components/commonTable/index.vue'
+  import wbTable from '@/components/commonTable/index.vue'
 <%_ } -%>
 
 <%_ if (wbForm) { -%>

@@ -25,7 +25,7 @@ export default {
   import FilterForm from '@/components/filterForm/index.vue'
 <%_ } -%>
 <%_ if (table) { -%>
-  import CommonTable from '@/components/commonTable/index.vue'
+  import wbTable from '@/components/commonTable/index.vue'
 <%_ } -%>
 
 <%_ if (filterForm) { -%>
