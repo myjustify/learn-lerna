@@ -50,6 +50,8 @@ export default {
 const comName = ref('<%= name %>')
 
 <%_ if (filterForm) { -%>
+  const listTypeInfo = reactive({})
+  
   const filterFormInfo = reactive({
     data: {
   
@@ -105,6 +107,8 @@ const comName = ref('<%= name %>')
     dialogProps.rowData = { ...rowData }
     dialogProps.dialogShow = !dialogProps.dialogShow
   }
+  
+  function dialogConfirm(fn, comName) {}
 <%_ } -%>
 
 </script>

@@ -58,6 +58,7 @@ defineProps({
 
 const comName = ref('<%= name %>')
 const emit = defineEmits(['confirm', 'cancel', 'update:isShow'])
+const listTypeInfo = reactive({})
 <%_ if (wbForm) { -%>
   const formInfo = reactive({
     data: {
