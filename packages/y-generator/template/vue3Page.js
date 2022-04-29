@@ -99,6 +99,11 @@ const comName = ref('<%= name %>')
   function handleSearch() {
     commonTableRef.value.fetchData()
   }
+  
+  function getFormData() {
+    const data = { ...filterFormInfo.data }
+    return { ...params }
+  }
 <%_ } -%>
 
 <%_ if (hasDialog) { -%>
