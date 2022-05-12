@@ -104,6 +104,8 @@ const comName = ref('<%= name %>')
     const data = { ...filterFormInfo.data }
     return { ...params }
   }
+  
+  function filterFormEvent({ field, event }) {}
 <%_ } -%>
 
 <%_ if (hasDialog) { -%>
@@ -113,7 +115,9 @@ const comName = ref('<%= name %>')
     dialogProps.dialogShow = !dialogProps.dialogShow
   }
   
-  function dialogConfirm(fn, comName) {}
+  function dialogConfirm(fn, comName) {
+    handleSearch()
+  }
 <%_ } -%>
 
 </script>

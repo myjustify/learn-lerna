@@ -156,6 +156,18 @@ onMounted(() => {
   function handleSearch() {
     commonTableRef.value.fetchData()
   }
+  
+  function getFormData() {
+    const data = { ...filterFormInfo.data }
+    // const params = 
+    // return { ...params }
+  }
+  
+  function filterFormEvent({ field, event }) {}
+<%_ } -%>
+
+<%_ if (wbForm) { -%>
+  function handleEvent({ field, event }) {}
 <%_ } -%>
 
 function toggleDialog () {
@@ -163,6 +175,6 @@ function toggleDialog () {
 }
 
 function confirm(){
-  emit('confirm')
+  emit('confirm',() => {}, '<%= name %>')
 }
 </script>`
