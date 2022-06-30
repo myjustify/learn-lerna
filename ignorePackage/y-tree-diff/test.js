@@ -31,5 +31,5 @@ const newTree = JSON.parse(JSON.stringify(oldTree))
 newTree[0].label = 'new-label1-2'
 newTree[0].children[0].label = 'new-label1-1'
 const Diff = new TreeNodeDiff(oldTree)
-const a = Diff.diff(newTree)
-console.log(a)
+// const a = Diff.diff(newTree)
+// console.log(a)
