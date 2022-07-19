@@ -175,6 +175,8 @@ function toggleDialog () {
 }
 
 function confirm(){
-  emit('confirm',() => {}, '<%= name %>')
+  emit('confirm',{
+    fn: () => {}, comName: '<%= name %>'
+  })
 }
 </script>`

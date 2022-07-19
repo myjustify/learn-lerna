@@ -1,3 +1,8 @@
 <template v-if="dialogProps.dialogShow">
-    <component :is="dialogProps.dialogName" :is-show.sync="dialogProps.dialogShow" :row-data="dialogProps.rowData" @handleSearch="handleSearch"></component>
+    <component
+        :is="dialogProps.dialogName"
+        :is-show.sync="dialogProps.dialogShow"
+        :row-data="dialogProps.rowData"
+        @confirm="dialogConfirm"
+    />
 </template>

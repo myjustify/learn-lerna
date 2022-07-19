@@ -46,7 +46,10 @@ export default `<template>
         this.dialogShow = !this.dialogShow
       },
       handleSearch(){
-        this.$emit('handleSearch')
+        this.$emit('confirm', { 
+          fn: () => {},
+          comName: '<%= name %>'
+        })
       },
       <%_ if (grTable) { -%>
       getOrderList: function({ param }, callback) {

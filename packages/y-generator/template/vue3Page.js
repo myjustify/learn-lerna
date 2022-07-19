@@ -115,7 +115,7 @@ const comName = ref('<%= name %>')
     dialogProps.dialogShow = !dialogProps.dialogShow
   }
   
-  function dialogConfirm(fn, comName) {
+  function dialogConfirm({fn, comName}) {
     handleSearch()
   }
 <%_ } -%>

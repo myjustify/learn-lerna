@@ -39,6 +39,9 @@ export const includes = {
     dialogName && (this.dialogProps.dialogName = dialogName)
     this.dialogProps.dialogShow = !this.dialogProps.dialogShow
     this.dialogProps.rowData = rowData
+  },
+  dialogConfirm({fn, comName}) {
+    handleSearch()
   }`,
   filterFormData: `formInfo: {
     ref: null,
