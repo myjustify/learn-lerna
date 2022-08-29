@@ -1,0 +1,32 @@
+{
+  "name": "y-generator",
+  "version": "1.0.176",
+  "description": "各类页面/组件创建",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "y": "index.js"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/myjustify/learn-lerna.git#master"
+  },
+  "keywords": [
+    "创建页面/组件等模版"
+  ],
+  "author": "myjustify",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/myjusvuetify/learn-lerna/issues"
+  },
+  "homepage": "https://github.com/myjustify/learn-lerna/tree/master#readme",
+  "dependencies": {
+    "commander": "^8.3.0",
+    "ejs": "^3.1.6",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.2.0"
+  }
+}

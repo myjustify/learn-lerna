@@ -1,6 +1,17 @@
 {
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "packages/dy-event/*",
+        "packages/y-utils/*",
+        "packages/y-rm-all-node-modules/*",
+        "ignorePackages/*"
+      ]
+    }
+  },
   "packages": [
-    "packages/*"
+    "packages/*",
+    "ignorePackages/*"
   ],
   "version": "independent"
 }

@@ -1,0 +1,19 @@
+{
+  "name": "dy-event",
+  "version": "1.0.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/myjustify/learn-lerna/tree/master/packages/dy-event"
+  },
+  "keywords": [
+    "发布订阅"
+  ],
+  "author": "",
+  "license": "ISC",
+  "gitHead": "51776d626ebb6c1600119e9fd693084bb6bc4d7e"
+}
