@@ -45,7 +45,7 @@ export default `<template>
       toggle(){
         this.dialogShow = !this.dialogShow
       },
-      handleSearch(){
+      confirm(){
         this.$emit('confirm', { 
           fn: () => {},
           comName: '<%= name %>'
