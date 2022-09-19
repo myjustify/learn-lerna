@@ -1,6 +1,6 @@
 {
   "name": "vuex-lasting",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "vuex lasting",
   "main": "dist/vuex-lasting.js",
   "module": "dist/vuex-lasting.mjs",
