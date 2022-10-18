@@ -27,9 +27,9 @@ export const includes = {
   tableMethods: `getOrderList: function({ param }, callback) {
     callback([])
   },
-  handleSearch() {
-    this.$refs.tableRef.handleSearch()
-  }`,
+  handleSearch(params ={} , extraParams = {}) {
+    this.$refs.tableRef.handleSearch(params, extraParams)
+  },`,
   dialogData: `dialogProps: {
     dialogShow: false,
     dialogName: '',
@@ -41,7 +41,7 @@ export const includes = {
     this.dialogProps.rowData = rowData
   },
   dialogConfirm({fn, comName}) {
-    handleSearch()
+    this.handleSearch({}, { saveCurrentPage: true })
   }`,
   filterFormData: `formInfo: {
     ref: null,
