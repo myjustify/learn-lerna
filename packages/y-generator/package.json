@@ -1,6 +1,6 @@
 {
   "name": "y-generator",
-  "version": "1.0.177",
+  "version": "1.0.178",
   "description": "各类页面/组件创建",
   "type": "module",
   "main": "index.js",
