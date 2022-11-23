@@ -29,7 +29,7 @@ export const includes = {
   },
   handleSearch(params ={} , extraParams = {}) {
     this.$refs.tableRef.handleSearch(params, extraParams)
-  },`,
+  }`,
   dialogData: `dialogProps: {
     dialogShow: false,
     dialogName: '',
