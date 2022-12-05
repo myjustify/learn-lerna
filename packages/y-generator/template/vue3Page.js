@@ -22,13 +22,6 @@ export default {
 </script>
 <script setup>
 <%_ if (filterForm) { -%>
-  import FilterForm from '@/components/filterForm/index.vue'
-<%_ } -%>
-<%_ if (table) { -%>
-  import WbTable from '@/components/commonTable/WbTable.vue'
-<%_ } -%>
-
-<%_ if (filterForm) { -%>
   const filterFormRef = ref(null)
 <%_ } -%>
 <%_ if (table) { -%>
@@ -101,8 +94,7 @@ const comName = ref('<%= name %>')
   }
   
   function getFormData() {
-    const data = { ...filterFormInfo.data }
-    return { ...params }
+    return { ...filterFormInfo.data }
   }
   
   function filterFormEvent({ field, event }) {}
