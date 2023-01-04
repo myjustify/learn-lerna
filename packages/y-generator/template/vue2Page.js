@@ -1,7 +1,7 @@
 import { includes } from './componentsTem.js'
 
 export default `<template>
-  <div>
+  <div :class="comName">
     <%_ if (grCollapse) { -%>
     <gr-collapse>
       <template v-slot:filter>
@@ -32,6 +32,7 @@ export default {
   name: '<%= name %>',
   data() {
     return {
+      comName: '<%= name %>',
       <%- data %>
     }
   },

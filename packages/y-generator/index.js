@@ -10,7 +10,7 @@ import vue3DialogPrompt from './prompts/vue3DialogPrompt.js'
 const program = new Command()
 
 program
-  .version('1.0.178')
+  .version('1.0.180')
   .command('create')
   .description('create template')
   .action( async () => {
