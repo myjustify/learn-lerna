@@ -24,17 +24,6 @@ export default {
 }
 </script>
 <script setup>
-import WbDialog from '@/components/base/WbDialog/index.vue'
-<%_ if (wbForm) { -%>
-  import WbForm from '@/components/commonForm/WbForm'
-<%_ } -%>
-<%_ if (filterForm) { -%>
-  import FilterForm from '@/components/filterForm/index.vue'
-<%_ } -%>
-<%_ if (table) { -%>
-  import WbTable from '@/components/commonTable/WbTable.vue'
-<%_ } -%>
-
 <%_ if (wbForm) { -%>
   const wbFormRef = ref(null)
 <%_ } -%>
