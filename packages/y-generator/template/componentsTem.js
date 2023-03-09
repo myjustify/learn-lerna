@@ -41,7 +41,7 @@ export const includes = {
     this.dialogProps.rowData = rowData
   },
   dialogConfirm({fn, comName}) {
-    this.handleSearch({}, { saveCurrentPage: true })
+    this.handleSearch({})
   }`,
   filterFormData: `formInfo: {
     ref: null,
