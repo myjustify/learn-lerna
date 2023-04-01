@@ -15,20 +15,14 @@ export default `<template>
     <%_ } -%>
   </div>
 </template>
-<script>
-export default {
-  name: '<%= name %>'
-}
-</script>
 <script setup>
-<%_ if (filterForm) { -%>
-  const filterFormRef = ref(null)
-<%_ } -%>
+defineOptions({
+  name: '<%= name %>'
+})
 <%_ if (table) { -%>
   const commonTableRef = ref(null)
 <%_ } -%>
 <%_ if (hasDialog) { -%>
-  const dialogRef = ref(null)
   const dialogCom = reactive({
     // uploadExcel: defineAsyncComponent(() => import('@/views/fund/payment/entrustTransportPayment/uploadExcel.vue'))
   })
