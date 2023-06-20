@@ -15,12 +15,12 @@ export default `<template>
     <%_ } -%>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 defineOptions({
   name: '<%= name %>'
 })
 <%_ if (table) { -%>
-  const commonTableRef = ref(null)
+  const commonTableRef = ref()
 <%_ } -%>
 <%_ if (hasDialog) { -%>
   const dialogCom = reactive({
@@ -32,13 +32,8 @@ defineOptions({
     rowData: {}
   })
 <%_ } -%>
-
-
 const comName = ref('<%= name %>')
-
 <%_ if (filterForm) { -%>
-  const listTypeInfo = reactive({})
-  
   const filterFormInfo = reactive({
     data: {
   
@@ -53,7 +48,6 @@ const comName = ref('<%= name %>')
     }
   })
 <%_ } -%>
-
 <%_ if (table) { -%>
   const tableData = reactive({
     headerOpt: [
@@ -74,14 +68,13 @@ const comName = ref('<%= name %>')
     ],
     sortArr: [],
     footerOpt: [],
-    requestFunc: (param) => {
+    requestFunc: (param: object) => {
       return Promise.resolve({
         content: [{ aaa: 'aaa' }]
       })
     }
   })
 <%_ } -%>
-
 <%_ if (filterForm) { -%>
   function handleSearch() {
     commonTableRef.value.fetchData()
@@ -93,9 +86,8 @@ const comName = ref('<%= name %>')
   
   function filterFormEvent({ field, event }) {}
 <%_ } -%>
-
 <%_ if (hasDialog) { -%>
-  function dialogToggle(name, rowData = {}) {
+  function dialogToggle(name: string, rowData = {}) {
     dialogProps.dialogName = name
     dialogProps.rowData = { ...rowData }
     dialogProps.dialogShow = !dialogProps.dialogShow
@@ -105,7 +97,6 @@ const comName = ref('<%= name %>')
     handleSearch()
   }
 <%_ } -%>
-
 </script>
 <style lang="scss" scoped>
   .<%= name %> {}

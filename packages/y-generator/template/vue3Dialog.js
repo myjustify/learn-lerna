@@ -1,5 +1,4 @@
 import { includes } from './vue3componentsTem.js'
-
 export default `<template>
    <wb-dialog
     v-model="dialogData.dialogShow"
@@ -18,23 +17,20 @@ export default `<template>
     <%_ } -%>
   </wb-dialog>
 </template>
-<script>
-export default {
+<script setup lang='ts'>
+defineOptions({
   name: '<%= name %>'
-}
-</script>
-<script setup>
+})
 <%_ if (wbForm) { -%>
-  const wbFormRef = ref(null)
+  const wbFormRef = ref()
 <%_ } -%>
 <%_ if (filterForm) { -%>
-  const filterFormRef = ref(null)
+  const filterFormRef = ref()
 <%_ } -%>
 <%_ if (table) { -%>
-  const commonTableRef = ref(null)
+  const commonTableRef = ref()
 <%_ } -%>
-
-defineProps({
+const props = defineProps({
   isShow: {
     type: Boolean,
     default: true
@@ -44,10 +40,8 @@ defineProps({
     default: () => ({})
   }
 })
-
 const comName = ref('<%= name %>')
 const emit = defineEmits(['confirm', 'cancel', 'update:isShow'])
-const listTypeInfo = reactive({})
 <%_ if (wbForm) { -%>
   const formInfo = reactive({
     data: {
@@ -63,7 +57,6 @@ const listTypeInfo = reactive({})
     }
   })
 <%_ } -%>
-
 <%_ if (filterForm) { -%>
   const filterFormInfo = reactive({
     data: {
@@ -79,7 +72,6 @@ const listTypeInfo = reactive({})
     }
   })
 <%_ } -%>
-
 <%_ if (table) { -%>
   const tableData = reactive({
     headerOpt: [
@@ -107,7 +99,6 @@ const listTypeInfo = reactive({})
     }
   })
 <%_ } -%>
-
 const dialogData = reactive({
   dialogShow: true,
   title: '<%= title %>',
@@ -129,40 +120,29 @@ const dialogData = reactive({
     }
   ]
 })
-
 watch(
   () => dialogData.dialogShow,
   val => {
     emit('update:isShow', val)
   }
 )
-
 onMounted(() => {
-  console.log(comName.value + 'onMounted')
 })
-
 <%_ if (filterForm) { -%>
   function handleSearch() {
     commonTableRef.value.fetchData()
   }
-  
   function getFormData() {
     const data = { ...filterFormInfo.data }
-    // const params = 
-    // return { ...params }
   }
-  
   function filterFormEvent({ field, event }) {}
 <%_ } -%>
-
 <%_ if (wbForm) { -%>
   function handleEvent({ field, event }) {}
 <%_ } -%>
-
 function toggleDialog () {
   dialogData.dialogShow = !dialogData.dialogShow
 }
-
 function confirm(){
   emit('confirm',{
     fn: () => {}, comName: '<%= name %>'
