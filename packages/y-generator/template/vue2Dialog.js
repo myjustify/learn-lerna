@@ -22,9 +22,14 @@ export default `<template>
         default: () => ({})
       }
     },
-    watch: {
-      dialogShow(nv) {
-        this.$emit('update:isShow', nv)
+    computed: {
+      dialogShow: {
+          get() {
+              return this.isShow
+          },
+          set(nv) {
+              this.$emit('update:isShow', nv)
+          }
       }
     },
     data(){

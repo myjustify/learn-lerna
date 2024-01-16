@@ -120,12 +120,14 @@ const dialogData = reactive({
     }
   ]
 })
-watch(
-  () => dialogData.dialogShow,
-  val => {
-    emit('update:isShow', val)
-  }
-)
+computed({
+    get() {
+        return props.isShow
+    },
+    set(nv) {
+        emit('update:isShow', val)
+    }
+})
 onMounted(() => {
 })
 <%_ if (filterForm) { -%>
